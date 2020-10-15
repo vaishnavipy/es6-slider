@@ -6,7 +6,7 @@
     <head>
     
     
-        <title>SideBar JavaScript</title>
+        <title>ES6 Slider-Vanilla JavaScript</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <!--  <link rel="stylesheet" href="reviews.css"> 
        <script src="reviews.js"></script>  --> 
@@ -14,10 +14,111 @@
         <script src="https://use.fontawesome.com/031e3862f6.js"></script>
 
         <style>
+            body{
+              background-color:   #F1F5F8;
+            }
 
+            #grid_container{
 
+                display: grid;
+                grid-template-columns: 30% 50% 30%;
+                justify-content: center;
+                padding-top: 15vh;
+                padding: 50px;
+             
+               
+                
+            }
+            #content{
+               
+                text-align: center;
+            }
         
+        #content h1{
+            color:#102A42;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 4px;
+        }
 
+        #left_arrow{
+            
+           
+            text-align: right;
+            font-size: 2rem;
+            cursor: pointer;
+            padding-top: 50%;
+        }
+        #right_arrow{
+            
+            font-size: 2rem;
+            cursor: pointer;
+            padding-top: 50%;
+        }
+        .image{
+            
+                object-fit: cover;
+                border-radius: 50%;
+                width:12vw;
+                height: 25vh;
+                padding: 5px;
+
+        }
+        .image_div{
+            border-radius: 50%;
+            
+               display: inline-block;
+               
+                border:1px solid skyblue;
+                background-color: white;
+            
+            }
+            #slides_container{
+
+                padding-top: 50px;
+              
+                position: relative;
+                transition:transform 1s;
+                overflow: hidden;
+                
+                height: 70vh;
+            }
+            .name{
+                color:#49A6E9;
+                letter-spacing: 3px;
+                font-size: 17px;
+
+            }
+            .role{
+
+                color:#617D98;
+                letter-spacing: 3px;
+                font-size: 17px;
+            }
+            .details{
+                color:#617D98;
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+            .quotes{
+
+                color:#49A6E9;
+                font-size: 5rem;
+            }
+            .center{
+              
+               transform: translateX(0);
+            }
+            .move_right{
+                transform: translateX(-100%);
+            }
+            .move_left{
+                transform: translateX(100%);
+            }
+            .slides{
+                transition:transform 1s;
+                background-color:#F1F5F8;
+                height: auto;
+            }
         </style>
         
     
@@ -26,10 +127,243 @@
 
 
     <body>
+
+        <div id="grid_container">
+        <div id="left_arrow"><i class="fa fa-chevron-circle-left"></i></div>
+        <div id="content">
+            <h1>/ Reviews</h1>
+            <div id="slides_container">
+             
+              <!--  <div class="slides">
+               <div class="image_div"> <img class="image" src="https://res.cloudinary.com/diqqf3eq2/image/upload/c_scale,w_200/v1595959131/person-3_rxtqvi.jpg"></div>
+
+                    <p class="name">EMMA DOE</p>
+                    <p class="role">Designer</p>
+                    <p class="details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quoeius recusandae officia voluptas sint deserunt dicta nihil nam omnis?</p>
+                    <p><span class="quotes"><i class="fa fa-quote-right"></i></span></p>
+                </div> -->
+
+            </div> 
+
+
+
+        </div>
+        <div id="right_arrow"><i class="fa fa-chevron-circle-right"></i></div>
+        </div>
       
 
         <script>
+            window.onload = function(){
+                let slides_div ;  let image_div ;  let image;  let name_para; let role_para;
 
+                let details_para;    let quotes_para;  let span;
+
+                const slides_container = document.getElementById("slides_container");
+
+
+                const people = [
+                    {
+
+                        name:"EMMA DOE",
+                        role:"Designer",
+                        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quoeius recusandae officia voluptas sint deserunt dicta nihil nam omnis?",
+                        imageURL:"https://res.cloudinary.com/diqqf3eq2/image/upload/c_scale,w_200/v1595959131/person-3_rxtqvi.jpg"
+
+
+                    },
+                    
+                    {
+
+                        name:"SUSAN DOE",
+                        role:"Developer",
+                        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quoeius recusandae officia voluptas sint deserunt dicta nihil nam omnis?",
+                        imageURL:"https://res.cloudinary.com/diqqf3eq2/image/upload/c_scale,w_200/v1595959131/person-2_ipcjws.jpg"
+
+
+
+                    },
+                    
+                    {
+                        name:"PETER DOE",
+                        role:"Product Manager",
+                        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quoeius recusandae officia voluptas sint deserunt dicta nihil nam omnis?",
+                        imageURL:"https://res.cloudinary.com/diqqf3eq2/image/upload/c_scale,w_200/v1595959121/person-1_aufeoq.jpg"
+
+
+                    }];
+
+                   people.forEach(function(obj,i){
+
+                    
+                        createElement(obj); 
+
+                    image_div.appendChild(image);
+                    
+                    slides_div.appendChild(image_div);
+
+                    slides_div.appendChild(name_para);
+
+                    slides_div.appendChild(role_para);
+
+                    slides_div.appendChild(details_para);
+
+                    quotes_para.appendChild(span);
+
+                    slides_div.appendChild(quotes_para);
+
+
+                    slides_container.appendChild(slides_div);
+
+
+                    if(i==0){
+                       
+                        slides_div.style.position = "absolute";
+                        slides_div.style.top="50"; 
+
+
+                    }
+                    else if(i%2==0){
+
+                        slides_div.style.position = "absolute";
+                        slides_div.style.top="50"; 
+
+                        slides_div.classList.add("move_left");
+
+                   
+                    }
+                    else{
+
+                        slides_div.style.position = "absolute";
+                        slides_div.style.top="50"; 
+
+                        slides_div.classList.add("move_left");
+                       
+                        
+                    } 
+
+
+
+                   })
+                  
+                   function createElement(obj){
+
+
+                      slides_div = document.createElement("DIV");
+                        slides_div.setAttribute("class","slides");
+
+                        image_div = document.createElement("DIV");
+                        image_div.setAttribute("class","image_div");
+
+                        image = document.createElement("IMG");
+                        image.setAttribute("class","image");
+                        image.setAttribute("src",obj.imageURL);
+
+                        name_para = document.createElement("P");
+                        name_para.setAttribute("class","name");
+                        name_para.textContent=obj.name;
+
+                        role_para=document.createElement("P");
+                        role_para.setAttribute("class","role");
+                        role_para.textContent = obj.role;
+
+                       details_para=document.createElement("P");
+                        details_para.setAttribute("class","details");
+                        details_para.textContent = obj.details;
+
+
+                        quotes_para=document.createElement("P");
+
+                       span = document.createElement("SPAN");
+                        span.setAttribute("class","quotes");
+                        span.innerHTML='<i class="fa fa-quote-right"></i>';
+
+
+
+
+
+                   }
+                   let index=0;
+                   const slide_count = document.getElementById("slides_container").childElementCount;
+
+                   const slide_children =  document.getElementById("slides_container").children;
+
+                   document.getElementById("right_arrow").onclick = function(){
+
+                    if(index < slide_count-1 ){
+
+                    for(var j=0; j < slide_children.length;j++){
+
+                        if(people[index]["name"] == slide_children[j].children[1].textContent){
+
+                            if(!slide_children[j].nextElementSibling){
+                                document.getElementById("slides_container").firstElementChild.style.zIndex="-1";
+                                document.getElementById("slides_container").firstElementChild.style.transform="translateX(100%)";
+                                document.getElementById("slides_container").firstElementChild.style.transition="transform 1s"
+                            }
+
+                           
+                       /*  if(slide_children[j] ==  document.getElementById("slides_container").firstElementChild){
+                                 console.log("firstchild")
+                              //  document.getElementById("slides_container").lastElementChild.style.display ="none";
+                                //document.getElementById("slides_container").lastElementChild.style.transform = "translateX(-100%)";
+                                
+                                slide_children[j].style.transform="translateX(0)";
+
+                                slide_children[j+1].style.transform="translateX(100%)";
+                                slide_children[j].style.zIndex="1";
+                                slide_children[j+1].style.zIndex="-1";
+                              //  slide_children[j].classList.add("move_right");
+                            slide_children[j].style.transition = "transform 1s";
+
+                            
+                            document.getElementById("slides_container").lastElementChild.style.transform="translateX(-100%)";
+                            document.getElementById("slides_container").lastElementChild.style.transition = "transform 1s";
+                            
+
+                             }  else{ */
+                                //slide_children[j].style.zIndex="1";
+                              //  document.getElementById("slides_container").firstElementChild.classList.add("move_left")
+                                slide_children[j+1].style.transform="translateX(0)";
+                           // slide_children[j].classList.add("move_right");
+                           slide_children[j].style.transform="translateX(-100%)";
+                            slide_children[j+1].style.transition = "transform 1s";
+                            slide_children[j].style.transition = "transform 1s";
+                           
+                            
+                             
+
+                            
+
+                            //slide_children[j].style.display ="block";
+                           
+                           
+
+                            index++;
+                            
+                           
+                            break;
+
+                        }
+
+
+                     }
+
+                       
+
+                    }else{
+                        index=0;
+
+                    }
+
+
+
+                   }
+
+
+
+
+
+            }
            
 
 
